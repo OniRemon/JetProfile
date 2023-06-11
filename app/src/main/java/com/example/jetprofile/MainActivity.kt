@@ -7,13 +7,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,7 +52,10 @@ class MainActivity : ComponentActivity() {
 fun MainContent() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(20.dp)
+        modifier = Modifier
+            .padding(20.dp)
+            .verticalScroll(rememberScrollState()),
+
     ) {
         Image(
             painter = painterResource(id = R.drawable.profile),
@@ -77,8 +82,9 @@ fun MainContent() {
         CompanySection()
         Spacer(modifier = Modifier.height(20.dp))
 
+        var isShowDetail by remember { mutableStateOf(false) }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { isShowDetail = !isShowDetail },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color(0xFFF85F6A)
@@ -90,6 +96,8 @@ fun MainContent() {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        DetailSection()
+        if (isShowDetail) {
+            DetailSection()
+        }
     }
 }

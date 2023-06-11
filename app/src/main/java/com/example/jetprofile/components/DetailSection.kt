@@ -23,7 +23,7 @@ fun DetailSection(){
     ) {
         Label(
             icon = Icons.Default.Favorite,
-            text = "スノーボード、個人開発",
+            text = "趣味：スノーボード、個人開発",
             color = Color.Gray
         )
         Spacer(modifier = Modifier.height(10.dp))
